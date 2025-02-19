@@ -1,4 +1,10 @@
-This project is a serverless AWS Lambda function designed to automate the validation of CSV files stored in an S3 bucket. The function is triggered by an event from S3 when a file is uploaded, and performs the following steps:
+**Architectural Diagram**
+
+![image](https://github.com/user-attachments/assets/65cf1097-54c1-400e-a327-8341831ce5d7)
+
+**Project Overview**
+
+This project is a serverless AWS Lambda function designed to automate the validation of CSV files stored in an S3 bucket. The function is triggered by an event from S3 when a file is uploaded and performs the following steps:
 
 1. Initialization:
 The Lambda function begins by initializing the AWS S3 client using boto3 and retrieves the S3 bucket and the file name (CSV) from the event object passed to it.
@@ -26,5 +32,5 @@ CSV File Parsing: The function reads, decodes, and parses CSV data for business 
 Serverless: The Lambda function is fully serverless, leveraging AWS S3 to trigger the process and perform file operations.
 
 
-In Summary;
+**Summary**
 This is a  serverless Lambda function that automates the validation of CSV files uploaded to an S3 bucket. It performs file retrieval, data parsing, validation, and error handling. If errors are detected, it moves the file to an error bucket and deletes the original file. This solution automates data validation, ensuring timely error detection with manual intervention
