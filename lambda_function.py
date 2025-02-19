@@ -11,14 +11,14 @@ def lambda_handler(event, context):
         csvfile = event['Records'][0]['s3']['object']['key']
         error_bucket = 'error-rec-bucket'
 
-        error_found = False  # Flag for error detection
+        error_found = False 
 
         # STAGE-2: Retrieve and Parse the File
         obj = s3.get_object(Bucket=billing_bucket, Key=csvfile)
         content = obj['Body'].read().decode('utf-8')
         lines = content.splitlines()
         csv_reader = csv.reader(lines)
-        data = list(csv_reader)[1:]  # Skip the header
+        data = list(csv_reader)[1:] 
 
         if not data:
             print("Error: No data found in CSV file after header.")
