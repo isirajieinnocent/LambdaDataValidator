@@ -1,36 +1,80 @@
-**Architectural Diagram**
+<h1> Project Overview </h1>
+
+This project is a serverless AWS Lambda function designed to automate the validation of CSV files stored in an S3 bucket. The function is triggered when a file is uploaded to S3 and performs data validation, error handling, and file management to ensure data integrity.
+
+
+<h1> Architectural Diagram </h1>
 
 ![image](https://github.com/user-attachments/assets/65cf1097-54c1-400e-a327-8341831ce5d7)
 
-**Project Overview**
+<h1> Solution Overview </h1>
 
-This project is a serverless AWS Lambda function designed to automate the validation of CSV files stored in an S3 bucket. The function is triggered by an event from S3 when a file is uploaded and performs the following steps:
+**Initialization:**
 
-1. Initialization:
-The Lambda function begins by initializing the AWS S3 client using boto3 and retrieves the S3 bucket and the file name (CSV) from the event object passed to it.
-It also defines a separate error bucket where files with validation errors will be moved.
+The Lambda function initializes the AWS S3 client using Boto3.
 
-2. File Retrieval and Parsing:
-The Lambda function fetches the CSV file from the S3 bucket specified in the event and reads its content.
-It then decodes the content from bytes to string and parses the CSV data into a list, skipping the header row. If the CSV has no data after the header, it returns an error response.
+Retrieves the S3 bucket and file name from the event object.
 
-3. Data Validation:
-The function validates each row in the CSV:
-It checks if the date field is in the correct format (%Y-%m-%d).
-It verifies if the product_line is one of the allowed values (Bakery, Meat, Dairy).
-If any validation fails, an error flag is set, and an error message is logged.
+Defines an error bucket for storing files with validation errors.
 
-4. Error Handling:
-If any errors are found, the function:
-Moves the erroneous CSV file to an "error" bucket for tracking.
+**File Retrieval and Parsing:**
+
+Fetches the CSV file from the S3 bucket and reads its content.
+
+Decodes the content from bytes to a string and parses the CSV data into a list, skipping the header row.
+
+Returns an error if the CSV has no data after the header.
+
+**Data Validation:**
+
+***Validates each row in the CSV:***
+
+Checks if the date field is in the correct format (%Y-%m-%d).
+
+Verifies if the product_line is one of the allowed values (e.g., Bakery, Meat, Dairy).
+
+Logs an error message if validation fails.
+
+**Error Handling:**
+
+***If errors are found:***
+
+Moves the erroneous CSV file to the error bucket.
+
 Deletes the original file from the billing bucket.
-If no errors are found, it returns a success response indicating that the CSV is valid.
 
-Key Features:
-Error Handling: All errors, including incorrect date formats and invalid product lines, are logged and flagged for moving the file to an error bucket.
-CSV File Parsing: The function reads, decodes, and parses CSV data for business logic validation.
-Serverless: The Lambda function is fully serverless, leveraging AWS S3 to trigger the process and perform file operations.
+If no errors are found, returns a success response.
 
+<h1> Key Features </h1>
 
-**Summary**
-This is a  serverless Lambda function that automates the validation of CSV files uploaded to an S3 bucket. It performs file retrieval, data parsing, validation, and error handling. If errors are detected, it moves the file to an error bucket and deletes the original file. This solution automates data validation, ensuring timely error detection with manual intervention
+Error Handling: Logs and flags errors, moving invalid files to an error bucket for tracking.
+
+CSV File Parsing: Reads, decodes, and parses CSV data for validation.
+
+Serverless Architecture: Fully serverless, leveraging AWS Lambda and S3 for automation.
+
+<h1> Key Technologies </h1>
+
+**AWS Lambda:** Serverless compute service for automation.
+
+**AWS S3:** Stores CSV files and triggers the Lambda function.
+
+**Boto3:** AWS SDK for Python, used to interact with S3 and perform file operations.
+
+<h1> Impact </h1>
+
+**Automated Validation:** Eliminates manual intervention by automating CSV file validation.
+
+**Error Detection:** Ensures timely detection of errors, improving data quality.
+
+**Cost-Effective:** Leverages serverless architecture for scalability and cost efficiency.
+
+<h1> Key Achievements </h1>
+
+Designed a serverless solution for automated CSV file validation.
+
+Implemented error handling to ensure data integrity and track invalid files.
+
+Improved operational efficiency by automating a previously manual process.
+
+**This project highlights my expertise in AWS serverless architecture, Python programming, and data validation. It demonstrates my ability to build scalable, efficient, and error-resistant solutions for data processing.** 
